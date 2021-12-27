@@ -10,4 +10,7 @@ public interface UserService {
     List<UserModel> findALL();
     Optional<UserModel> findById(UUID userId);
     void delete(UserModel userModel);
+    void save(UserModel userModel);
+    boolean existsByUserName(String userName);
+    boolean existsByUserEmail(String email);
 }
