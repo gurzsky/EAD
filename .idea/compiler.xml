@@ -20,7 +20,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="authuser" options="-parameters" />
+      <module name="authuser" options="-parameters --add-modules java.base" />
       <module name="course" options="-parameters" />
       <module name="notification" options="-parameters" />
     </option>
