@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
 @RequestMapping("/courses")
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -71,7 +74,13 @@ public class CourseController {
     @GetMapping
     public ResponseEntity<Page<CourseModel>> getAllCourses(SpecificationTemplate.CourseSpec spec,
                                                            @PageableDefault(page = 0, size = 10, sort = "courseId", direction = Sort.Direction.ASC) Pageable pageable) {
-        return ResponseEntity.status(HttpStatus.OK).body(courseService.findAll(spec, pageable));
+        Page<CourseModel> courseModelPage = courseService.findAll(spec, pageable);
+        if (!courseModelPage.isEmpty()) {
+            for (CourseModel course : courseModelPage.toList()) {
+                course.add(linkTo(methodOn(CourseController.class).getOneCourse(course.getCourseId())).withSelfRel());
+            }
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(courseModelPage);
     }
 
     @GetMapping("/{courseId}")

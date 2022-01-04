@@ -23,6 +23,9 @@ import java.time.ZoneId;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
 @RequestMapping("/courses/{courseId}/modules")
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -81,7 +84,13 @@ public class ModuleController {
     public ResponseEntity<Page<ModuleModel>> getAllModules(@PathVariable(value = "courseId")UUID courseId,
                                                            SpecificationTemplate.ModuleSpec spec,
                                                            @PageableDefault(page = 0, size = 10, sort = "moduleId", direction = Sort.Direction.ASC) Pageable pageable) {
-        return ResponseEntity.status(HttpStatus.OK).body(moduleService.findAllByCourse(SpecificationTemplate.moduleCourseId(courseId).and(spec), pageable));
+        Page<ModuleModel> moduleModelPage = moduleService.findAllByCourse(SpecificationTemplate.moduleCourseId(courseId).and(spec), pageable);
+        if (!moduleModelPage.isEmpty()) {
+            for (ModuleModel module : moduleModelPage.toList()) {
+                module.add(linkTo(methodOn(ModuleController.class).getOneModule(courseId, module.getModuleId())).withSelfRel());
+            }
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(moduleModelPage);
     }
 
     @GetMapping("/{moduleId}")
