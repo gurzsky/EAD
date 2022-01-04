@@ -38,4 +38,14 @@ public class SpecificationTemplate {
             return criteriaBuilder.and(criteriaBuilder.equal(course.get("courseId"), courseId), criteriaBuilder.isMember(module, coursesModules)); //CriteriaBuilder expression
         };
     }
+
+    public static Specification<LessonModel> lessonModuleId(final UUID moduleId) {
+        return (root, query, criteriaBuilder) -> {
+            query.distinct(true);
+            Root<LessonModel> lesson = root; //Entity A - Lesson
+            Root<ModuleModel> module = query.from(ModuleModel.class); //Entity B - Module
+            Expression<Collection<LessonModel>> coursesLessons = module.get("lessons"); //Collection of A Entity (Lesson) in B Entity (Module)
+            return criteriaBuilder.and(criteriaBuilder.equal(module.get("moduleId"), moduleId), criteriaBuilder.isMember(lesson, coursesLessons)); //CriteriaBuilder expression
+        };
+    }
 }
