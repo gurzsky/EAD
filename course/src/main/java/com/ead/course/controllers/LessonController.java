@@ -1,8 +1,6 @@
 package com.ead.course.controllers;
 
 import com.ead.course.dtos.LessonDto;
-import com.ead.course.dtos.ModuleDto;
-import com.ead.course.models.CourseModel;
 import com.ead.course.models.LessonModel;
 import com.ead.course.models.ModuleModel;
 import com.ead.course.services.LessonService;
@@ -46,7 +44,7 @@ public class LessonController {
     }
 
     @DeleteMapping("/{lessonId}")
-    public ResponseEntity<Object> deleteCourse(@PathVariable(value = "moduleId")UUID moduleId,
+    public ResponseEntity<Object> deleteLesson(@PathVariable(value = "moduleId")UUID moduleId,
                                                @PathVariable(value = "lessonId")UUID lessonId) {
         Optional<LessonModel> lessonModelOptional = lessonService.findLessonIntoModule(moduleId, lessonId);
 
@@ -59,7 +57,7 @@ public class LessonController {
     }
 
     @PutMapping("/{lessonId}")
-    public ResponseEntity<Object> updateModule(@PathVariable(value = "moduleId")UUID moduleId,
+    public ResponseEntity<Object> updateLesson(@PathVariable(value = "moduleId")UUID moduleId,
                                                @PathVariable(value = "lessonId")UUID lessonId,
                                                @RequestBody @Validated LessonDto lessonDto) {
         Optional<LessonModel> lessonModelOptional = lessonService.findLessonIntoModule(moduleId, lessonId);
@@ -79,7 +77,7 @@ public class LessonController {
         return ResponseEntity.status(HttpStatus.OK).body(lessonService.findAllByModule(moduleId));
     }
 
-    @GetMapping("/{moduleId}")
+    @GetMapping("/{lessonId}")
     public ResponseEntity<Object> getOneLesson(@PathVariable(value = "moduleId")UUID moduleId,
                                                @PathVariable(value = "lessonId")UUID lessonId) {
         Optional<LessonModel> lessonModelOptional = lessonService.findLessonIntoModule(moduleId, lessonId);

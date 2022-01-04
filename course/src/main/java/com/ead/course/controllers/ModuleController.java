@@ -46,7 +46,7 @@ public class ModuleController {
     }
 
     @DeleteMapping("/{moduleId}")
-    public ResponseEntity<Object> deleteCourse(@PathVariable(value = "courseId")UUID courseId,
+    public ResponseEntity<Object> deleteModule(@PathVariable(value = "courseId")UUID courseId,
                                                @PathVariable(value = "moduleId")UUID moduleId) {
         Optional<ModuleModel> moduleModelOptional = moduleService.findModuleIntoCourse(courseId, moduleId);
 
@@ -74,7 +74,7 @@ public class ModuleController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ModuleModel>> getAllCourses(@PathVariable(value = "courseId")UUID courseId) {
+    public ResponseEntity<List<ModuleModel>> getAllModules(@PathVariable(value = "courseId")UUID courseId) {
         return ResponseEntity.status(HttpStatus.OK).body(moduleService.findAllByCourse(courseId));
     }
 
