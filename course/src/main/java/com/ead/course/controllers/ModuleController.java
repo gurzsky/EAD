@@ -25,10 +25,10 @@ import java.util.UUID;
 public class ModuleController {
 
     @Autowired
-    ModuleService moduleService;
+    private ModuleService moduleService;
 
     @Autowired
-    CourseService courseService;
+    private CourseService courseService;
 
     @PostMapping
     public ResponseEntity<Object> saveModule(@PathVariable(value = "courseId") UUID courseId,

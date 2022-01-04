@@ -22,13 +22,13 @@ public class LessonModel implements Serializable {
     private UUID lessonId;
     @Column(nullable = false, length = 150)
     private String title;
-    @Column(nullable = false, length = 250)
+    @Column(length = 250)
     private String description;
     @Column(nullable = false)
     private String videoUrl;
     @Column(nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
-    private LocalDateTime creationData;
+    private LocalDateTime creationDate;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
