@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class UserModel extends RepresentationModel<UserModel> implements Seriali
     private String userName;
     @Column(nullable = false, unique = true, length = 50)
     private String email;
+    @ToString.Exclude
     @Column(nullable = false, length = 255)
     @JsonIgnore
     private String password;
