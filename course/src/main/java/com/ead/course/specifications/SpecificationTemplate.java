@@ -1,6 +1,7 @@
 package com.ead.course.specifications;
 
 import com.ead.course.models.CourseModel;
+import com.ead.course.models.CourseUserModel;
 import com.ead.course.models.LessonModel;
 import com.ead.course.models.ModuleModel;
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
@@ -10,6 +11,7 @@ import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import java.util.Collection;
 import java.util.UUID;
@@ -46,6 +48,14 @@ public class SpecificationTemplate {
             Root<ModuleModel> module = query.from(ModuleModel.class); //Entity B - Module
             Expression<Collection<LessonModel>> coursesLessons = module.get("lessons"); //Collection of A Entity (Lesson) in B Entity (Module)
             return criteriaBuilder.and(criteriaBuilder.equal(module.get("moduleId"), moduleId), criteriaBuilder.isMember(lesson, coursesLessons)); //CriteriaBuilder expression
+        };
+    }
+
+    public static Specification<CourseModel> courseUserId(final UUID userId) {
+        return (root, query, cb) -> {
+            query.distinct(true);
+            Join<CourseModel, CourseUserModel> courseProd = root.join("coursesUsers"); // Join entre as duas entidades CourseModel e CourseUserModel, usando o atributo "coursesUsers" da entidade CourseModel para o join
+            return cb.equal(courseProd.get("userId"), userId); // com a consulta definida na linha acima, filtra apenas as linhas com o userId desejado
         };
     }
 }
