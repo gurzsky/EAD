@@ -26,7 +26,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
       <module name="authuser" options="-parameters" />
-      <module name="course" options="-parameters" />
+      <module name="course" options="-parameters --add-modules java.base" />
       <module name="notification" options="-parameters" />
       <module name="service-registry" options="-parameters" />
     </option>

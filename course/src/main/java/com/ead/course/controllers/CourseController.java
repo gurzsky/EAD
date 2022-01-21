@@ -3,6 +3,7 @@ package com.ead.course.controllers;
 import com.ead.course.dtos.CourseDto;
 import com.ead.course.models.CourseModel;
 import com.ead.course.services.CourseService;
+import com.ead.course.services.CourseUserService;
 import com.ead.course.specifications.SpecificationTemplate;
 import com.ead.course.validation.CourseValidator;
 import lombok.extern.log4j.Log4j2;
@@ -37,6 +38,9 @@ public class CourseController {
 
     @Autowired
     private CourseValidator courseValidator;
+
+    @Autowired
+    private CourseUserService courseUserService;
 
     @PostMapping
     public ResponseEntity<Object> saveCourse(@RequestBody CourseDto courseDto, Errors errors) {
@@ -119,4 +123,15 @@ public class CourseController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course Not Found");
         }
     }
+
+    @DeleteMapping("/users/{userId}")
+    public ResponseEntity<Object> deleteCourseUserByUser(@PathVariable(value = "userId") UUID userId) {
+        if (!courseUserService.existsByUserId(userId))
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("CourseUser not found.");
+
+        courseUserService.deleteCourseByUser(userId);
+        return ResponseEntity.status(HttpStatus.OK).body("CourseUser deleted successfully.");
+
+    }
+
 }
