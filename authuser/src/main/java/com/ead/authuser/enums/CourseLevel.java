@@ -1,4 +1,4 @@
-package com.ead.authuser.dtos;
+package com.ead.authuser.enums;
 
 public enum CourseLevel {
     BEGINNER,
