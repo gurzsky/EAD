@@ -23,7 +23,7 @@ spring:
     ansi:
       enabled: Always
   rabbitmq:
-    addresses: amqps://wfvxhtau:Fp4oP70iWz3z6nlgLEYnLTOVCfbBCRY1@tiger.rmq.cloudamqp.com/wfvxhtau
+    addresses: x
 
 logging:
   level:

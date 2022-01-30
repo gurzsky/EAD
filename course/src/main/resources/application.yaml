@@ -20,7 +20,7 @@ spring:
       hibernate:
         show_sql: true
   rabbitmq:
-    addresses: amqps://wfvxhtau:Fp4oP70iWz3z6nlgLEYnLTOVCfbBCRY1@tiger.rmq.cloudamqp.com/wfvxhtau
+    addresses: x
 
 ead:
   api:
