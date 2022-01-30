@@ -7,7 +7,7 @@ import java.util.UUID;
 public class UserEventDto {
 
     private UUID userId;
-    private String username;
+    private String userName;
     private String email;
     private String fullName;
     private String userStatus;
