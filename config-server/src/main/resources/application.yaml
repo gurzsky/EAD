@@ -1,0 +1,14 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: ead-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/gurzsky/ead-config-server-repo
+          default-label: main
+          username: gurzsky
+          password: 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
