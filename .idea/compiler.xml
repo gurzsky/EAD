@@ -10,6 +10,7 @@
         <module name="api-gateway" />
         <module name="course" />
         <module name="notification" />
+        <module name="config-server" />
         <module name="authuser" />
         <module name="service-registry" />
       </profile>
@@ -17,6 +18,7 @@
     <bytecodeTargetLevel>
       <module name="api-gateway" target="11" />
       <module name="authuser" target="11" />
+      <module name="config-server" target="11" />
       <module name="course" target="11" />
       <module name="notification" target="11" />
       <module name="service-registry" target="11" />
@@ -25,8 +27,9 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
-      <module name="authuser" options="-parameters --add-modules java.base" />
-      <module name="course" options="-parameters --add-modules java.base" />
+      <module name="authuser" options="-parameters" />
+      <module name="config-server" options="-parameters" />
+      <module name="course" options="-parameters" />
       <module name="notification" options="-parameters" />
       <module name="service-registry" options="-parameters" />
     </option>
