@@ -1,48 +1,51 @@
-#server:
-#  port: 8082
-#  servlet:
-#    context-path: '/ead-course/'
-#
+server:
+  port: 8082
+  servlet:
+    context-path: '/ead-course/'
+
 spring:
   application:
     name: ead-course-service
   config:
-    import: 'configserver:'
+    import: 'optional:configserver:'
   cloud:
     config:
       discovery:
         serviceId: ead-config-server
 
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/ead-course-v2
-#    username: postgres
-#    password: postgres
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#      dialect: org.hibernate.dialect.PostgreSQLDialect
-#      jdbc:
-#        lob.non-contextual-creation: true
-#    properties:
-#      hibernate:
-#        show_sql: true
-#  rabbitmq:
-#    addresses: x
-#
-#ead:
-#  api:
-#    url:
-#      authuser: 'http://ead-authuser-service/ead-authuser'
-#  broker:
-#    exchange:
-#      userEventExchange: ead.userevent
-#    queue:
-#      userEventQueue:
-#        name: ead.userevent.ms.course
-#
-#eureka:
-#  client:
-#    serviceUrl:
-#      defaultZone: 'http://localhost:8761/eureka'
-#  instance:
-#    hostname: localhost
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ead-course-v2
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      jdbc:
+        lob.non-contextual-creation: true
+    properties:
+      hibernate:
+        show_sql: true
+  rabbitmq:
+    addresses: amqps://wfvxhtau:Fp4oP70iWz3z6nlgLEYnLTOVCfbBCRY1@tiger.rmq.cloudamqp.com/wfvxhtau
+
+ead:
+  api:
+    url:
+      authuser: 'http://ead-authuser-service/ead-authuser'
+  broker:
+    exchange:
+      userEventExchange: ead.userevent
+      notificationCommandExchange: ead.notificationcommand
+    queue:
+      userEventQueue:
+        name: ead.userevent.ms.course
+    key:
+      notificationCommandKey: ms.notification
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: 'http://localhost:8761/eureka'
+  instance:
+    hostname: localhost
