@@ -48,6 +48,14 @@ ead:
     key:
       notificationCommandKey: ms.notification
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - refresh
+          - health
+
 eureka:
   client:
     serviceUrl:
