@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -27,5 +28,10 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public Page<NotificationModel> findAllNotificationByUser(UUID userId, Pageable pageable) {
         return notificationRepository.findAllByUserIdAndNotificationStatus(userId, NotificationStatus.CREATED, pageable);
+    }
+
+    @Override
+    public Optional<NotificationModel> findByNotificationIdAndUserId(UUID notificationId, UUID userId) {
+        return notificationRepository.findByNotificationIdAndUserId(notificationId, userId);
     }
 }
