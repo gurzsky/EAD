@@ -11,11 +11,15 @@ spring:
           uri: https://github.com/gurzsky/ead-config-server-repo
           default-label: main
           username: gurzsky
-          password: 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
+          password: x
+ead:
+  serviceRegistry:
+    username: serviceregistry
+    password: 'ead123sr'
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: 'http://localhost:8761/eureka'
+      defaultZone: 'http://${ead.serviceRegistry.username}:${ead.serviceRegistry.password}@localhost:8761/eureka'
   instance:
     hostname: localhost
