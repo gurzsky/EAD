@@ -1,5 +1,6 @@
 package com.ead.authuser.controllers;
 
+import com.ead.authuser.configs.security.AuthenticationCurrentUserService;
 import com.ead.authuser.configs.security.UserDetailsImpl;
 import com.ead.authuser.dtos.UserDto;
 import com.ead.authuser.models.UserModel;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,6 +39,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    AuthenticationCurrentUserService authenticationCurrentUserService;
+
     @PreAuthorize("hasAnyRole('ADMIN','STUDENT')")
     @GetMapping
     public ResponseEntity<Page<UserModel>> getAllUser(
@@ -57,14 +62,22 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userModelPage);
     }
 
+    @PreAuthorize("hasAnyRole('STUDENT')")
     @GetMapping("/{userId}")
     public ResponseEntity<Object> getOneUser(@PathVariable(value = "userId")UUID userId) {
-        Optional<UserModel> userModelOptional = userService.findById(userId);
-        if (userModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(userModelOptional.get());
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+
+        //example how to recovery information from authentication
+        UUID currentUserId = authenticationCurrentUserService.getCurrentUser().getUserId();
+
+        if (currentUserId.equals(userId)) {
+            Optional<UserModel> userModelOptional = userService.findById(userId);
+            if (userModelOptional.isPresent()) {
+                return ResponseEntity.status(HttpStatus.OK).body(userModelOptional.get());
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            }
         }
+        throw new AccessDeniedException("Forbidden");
     }
 
     @DeleteMapping("/{userId}")
