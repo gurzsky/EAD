@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,6 +39,7 @@ public class LessonController {
     @Autowired
     private ModuleService moduleService;
 
+    @PreAuthorize("hasAnyRole('INSTRUCTOR')")
     @PostMapping
     public ResponseEntity<Object> saveLesson(@PathVariable(value = "moduleId") UUID moduleId,
                                              @RequestBody @Validated LessonDto lessonDto) {
@@ -56,6 +58,7 @@ public class LessonController {
         return ResponseEntity.status(HttpStatus.CREATED).body(lessonModel);
     }
 
+    @PreAuthorize("hasAnyRole('INSTRUCTOR')")
     @DeleteMapping("/{lessonId}")
     public ResponseEntity<Object> deleteLesson(@PathVariable(value = "moduleId")UUID moduleId,
                                                @PathVariable(value = "lessonId")UUID lessonId) {
@@ -72,6 +75,7 @@ public class LessonController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lesson Not Found");
     }
 
+    @PreAuthorize("hasAnyRole('INSTRUCTOR')")
     @PutMapping("/{lessonId}")
     public ResponseEntity<Object> updateLesson(@PathVariable(value = "moduleId")UUID moduleId,
                                                @PathVariable(value = "lessonId")UUID lessonId,
@@ -91,6 +95,7 @@ public class LessonController {
         return ResponseEntity.status(HttpStatus.CREATED).body(lessonModel);
     }
 
+    @PreAuthorize("hasAnyRole('STUDENT')")
     @GetMapping
     public ResponseEntity<Page<LessonModel>> getAllLessons(@PathVariable(value = "moduleId")UUID moduleId,
                                                            SpecificationTemplate.LessonSpec spec,
@@ -104,6 +109,7 @@ public class LessonController {
         return ResponseEntity.status(HttpStatus.OK).body(lessonModelPage);
     }
 
+    @PreAuthorize("hasAnyRole('STUDENT')")
     @GetMapping("/{lessonId}")
     public ResponseEntity<Object> getOneLesson(@PathVariable(value = "moduleId")UUID moduleId,
                                                @PathVariable(value = "lessonId")UUID lessonId) {
