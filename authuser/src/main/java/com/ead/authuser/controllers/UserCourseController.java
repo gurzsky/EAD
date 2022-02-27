@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -26,9 +27,11 @@ public class UserCourseController {
     @Autowired
     private UserService userService;
 
+    @PreAuthorize("hasAnyRole('STUDENT')")
     @GetMapping("/users/{userId}/courses")
     public ResponseEntity<Page<CourseDto>> getAllCoursesByUser(@PageableDefault(page = 0, size = 10, sort = "courseId", direction = Sort.Direction.ASC)Pageable pageable,
-                                                               @PathVariable(value = "userId")UUID userId) {
-        return ResponseEntity.status(HttpStatus.OK).body(userClient.getAllCoursesByUser(pageable, userId));
+                                                               @PathVariable(value = "userId")UUID userId,
+                                                               @RequestHeader("Authorization") String token) {
+        return ResponseEntity.status(HttpStatus.OK).body(userClient.getAllCoursesByUser(pageable, userId, token));
     }
 }
