@@ -11,7 +11,7 @@ spring:
           uri: https://github.com/gurzsky/ead-config-server-repo
           default-label: main
           username: gurzsky
-          password: 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
+          password: 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
 ead:
   configServer:
     username: configserver
