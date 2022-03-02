@@ -22,7 +22,7 @@ public class RabbitmqConfig {
 
     @Bean
     public RabbitTemplate rabbitTemplate() { // cria ponto de injecao dentro do publisher para enviar as mensagens/eventos
-        RabbitTemplate template = new RabbitTemplate(cachingConnectionFactory); // conecta instancia com o Rabbitmq usando o endereço definido no application.yaml
+        RabbitTemplate template = new RabbitTemplate(cachingConnectionFactory); // conecta instancia com o Rabbitmq usando o endereço definido no application-prod.yaml
         template.setMessageConverter(messageConverter());
         return template;
     }
