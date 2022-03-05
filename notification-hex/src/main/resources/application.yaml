@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: ead-notification-service-hex
+  config:
+    import: 'configserver:'
+  cloud:
+    config:
+      discovery:
+        serviceId: ead-config-server
+      username: configserver
+      password: 'ead123cs'
+
+
