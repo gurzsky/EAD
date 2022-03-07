@@ -1,4 +1,4 @@
-package com.ead.notificationhex.adapters.configs.security;
+package com.ead.notification.hex.adapters.configs.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

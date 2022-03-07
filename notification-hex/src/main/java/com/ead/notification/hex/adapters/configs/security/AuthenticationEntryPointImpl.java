@@ -1,4 +1,4 @@
-package com.ead.notificationhex.adapters.configs.security;
+package com.ead.notification.hex.adapters.configs.security;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.AuthenticationException;

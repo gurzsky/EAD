@@ -1,4 +1,4 @@
-package com.ead.notificationhex.core.domain.enums;
+package com.ead.notification.hex.core.domain.enums;
 
 public enum NotificationStatus {
     CREATED,

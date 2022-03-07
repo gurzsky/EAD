@@ -1,4 +1,4 @@
-package com.ead.notificationhex.adapters.configs.security;
+package com.ead.notification.hex.adapters.configs.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

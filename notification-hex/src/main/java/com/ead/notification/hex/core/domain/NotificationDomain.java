@@ -1,6 +1,6 @@
-package com.ead.notificationhex.core.domain;
+package com.ead.notification.hex.core.domain;
 
-import com.ead.notificationhex.core.domain.enums.NotificationStatus;
+import com.ead.notification.hex.core.domain.enums.NotificationStatus;
 import lombok.Getter;
 import lombok.Setter;
 

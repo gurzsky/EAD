@@ -1,4 +1,4 @@
-package com.ead.notificationhex;
+package com.ead.notification.hex;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
