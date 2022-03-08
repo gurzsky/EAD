@@ -33,7 +33,7 @@
       <module name="config-server" options="-parameters" />
       <module name="course" options="-parameters" />
       <module name="notification" options="-parameters" />
-      <module name="notification-hex" options="-parameters" />
+      <module name="notification-hex" options="-parameters --add-modules java.base" />
       <module name="service-registry" options="-parameters" />
     </option>
   </component>
